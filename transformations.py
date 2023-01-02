@@ -40,11 +40,11 @@ class Transformations(Scene):
         half_L_ex.shift(2.3*RIGHT)
 
         self.play(FadeIn(box_group))
-        self.wait(1)
+        self.wait(0.5)
         self.play(FadeIn(L_ex))
-        self.wait(2)
+        self.wait(4)
         self.play(FadeIn(half_L_ex))
-        self.wait(1)
+        self.wait(5)
         self.play(FadeOut(box_group, L_ex, half_L_ex))
 
         # We can draw an NFA of L, like this. Because we know what strings are in L, 
@@ -53,8 +53,10 @@ class Transformations(Scene):
         arrows = self.ExampleArrows()
         ex_txt = self.ExampleText()
         self.play(Create(ex_start), Create(ex_a), Create(ex_aa), Create(ex_aaa), Create(ex_aaaa), Create(ex_ab), Create(ex_aba), Create(ex_abab), Create(ex_abc), Create(reject), FadeIn(arrows), FadeIn(ex_txt))
-        self.wait(1)
-        self.play(FadeOut(ex_start, ex_a, ex_aa, ex_aaa, ex_aaaa, ex_ab, ex_aba, ex_abab, ex_abc, reject, arrows, ex_txt))
+        self.wait(10)
+        self.play(FadeOut(ex_aaaa, ex_aa, ex_aba, ex_abab, ex_abc, reject))
+        self.wait(4)
+        self.play(FadeOut(ex_start, ex_a, ex_ab, ex_aaa, arrows, ex_txt))
         
 
         # But what if the language L is arbitrary?
@@ -68,9 +70,9 @@ class Transformations(Scene):
         goal_text.shift(0.7*DOWN)
 
         self.play(FadeIn(obj_text))
-        self.wait(1)
+        self.wait(10)
         self.play(FadeIn(goal_text))
-        self.wait(1)
+        self.wait(12)
         self.play(FadeOut(obj_text, goal_text))
 
         # So how do we approach this problem?
@@ -90,7 +92,7 @@ class Transformations(Scene):
         # If M’ ‘s guess is correct, then M’ will be at an accepting state of M when it finishes processing w.
         strat = Text("Strategy", font_size = 60, color=PINK)
         self.play(FadeIn(strat))
-        self.wait(1)
+        self.wait(7)
 
         self.play(strat.animate.shift(2.6*UP).scale(0.6), run_time=1)
         self.wait(1)
@@ -106,7 +108,7 @@ class Transformations(Scene):
         wxxxx = Text("w = xxxx", font_size = 40, color=Colors.gold_e.value)
         wxxxx.shift(3*DOWN)
         self.play(FadeIn(wxxxx))
-        self.wait(1)
+        self.wait(4)
 
         ac1.set_fill(RED, opacity=1.0)
         ac5.set_fill(RED, opacity=1.0)
@@ -129,7 +131,7 @@ class Transformations(Scene):
         ac3.set_fill(PINK, opacity=0.5)
         ac7.set_fill(PINK, opacity=0.5)
         wxxxx[5].set_color(WHITE)
-        self.wait(1)
+        self.wait(9.5)
 
         self.play(FadeOut(start, ac1, ac2, ac3, ac4, ac5, ac6,  ac7, ac8, border, wxxxx, strat, arbarrows))
         

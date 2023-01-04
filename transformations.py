@@ -16,7 +16,7 @@ class Transformations(Scene):
         self.play(FadeIn(half_l_def))
         self.wait(10)
 
-        self.play(half_l_def.animate.shift(3.6*UP).scale(0.6), run_time=1)
+        self.play(half_l_def.animate.shift(3.4*UP).scale(0.6), run_time=1)
         self.wait(1)
 
         # For example, let's say that the language L contains the following strings: aaaa, abab, abc.
@@ -50,13 +50,22 @@ class Transformations(Scene):
         # We can draw an NFA of L, like this. Because we know what strings are in L, 
         # we can also easily construct an NFA of half(L).
         ex_start, ex_a, ex_ab, ex_aaa, ex_aaaa, ex_aa, ex_aba, ex_abab, ex_abc, reject = self.ExampleGroup()
-        arrows = self.ExampleArrows()
-        ex_txt = self.ExampleText()
+        arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10, arrow11, border1, border2, border3 = self.ExampleArrows()
+        arrows = Group(arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10, arrow11, border1, border2, border3)
+        txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9 = self.ExampleText()
+        ex_txt = Group(txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9)
+        txt = Group(txt4, txt5, txt6, txt7, txt8, txt9)
+        fade1 = Group(ex_aaaa, ex_aa, ex_aba, ex_abab, ex_abc, reject, arrow2, arrow3, arrow6, arrow7, arrow8, arrow9, arrow10, arrow11, border1, border2, border3, txt)
+        fade2 = Group(ex_start, ex_a, ex_ab, ex_aaa, arrow1, arrow4, arrow5, txt1, txt2, txt3)
+        tempborder1 = Circle(radius=0.6).shift(1*RIGHT+2.0*UP)
+        tempborder2 = Circle(radius=0.6).shift(1.5*LEFT+1.6*DOWN)
         self.play(Create(ex_start), Create(ex_a), Create(ex_aa), Create(ex_aaa), Create(ex_aaaa), Create(ex_ab), Create(ex_aba), Create(ex_abab), Create(ex_abc), Create(reject), FadeIn(arrows), FadeIn(ex_txt))
         self.wait(10)
-        self.play(FadeOut(ex_aaaa, ex_aa, ex_aba, ex_abab, ex_abc, reject))
+        self.play(FadeOut(fade1))
+        self.play(fade2.animate.shift(2.5*RIGHT), FadeIn(tempborder1), FadeIn(tempborder2))
         self.wait(4)
-        self.play(FadeOut(ex_start, ex_a, ex_ab, ex_aaa, arrows, ex_txt))
+        self.play(FadeOut(fade2), FadeOut(tempborder1), FadeOut(tempborder2))
+        fade2.shift(2.5*LEFT)
         
 
         # But what if the language L is arbitrary?
@@ -64,7 +73,7 @@ class Transformations(Scene):
         # L is represented by the NFA M.
         # Our goal is to create a new NFA, that is based on M, that accepts half(L).
         # and turns out we can construct a new NFA using transformations.
-        obj_text = MarkupText(f'We are given a DFA <span fgcolor="{YELLOW}">M</span> that accepts L\n(we don\'t know what strings are in L)', font_size = 30, color=BLUE)
+        obj_text = MarkupText(f'We are given a NFA <span fgcolor="{YELLOW}">M</span> that accepts L\n(we don\'t know what strings are in L)', font_size = 30, color=BLUE)
         goal_text = MarkupText(f'Our goal is to create an NFA <span fgcolor="{YELLOW}">M\'</span>, based on M, that accepts half(L)', font_size = 30, color=BLUE)
         obj_text.shift(0.7*UP)
         goal_text.shift(0.7*DOWN)
@@ -107,34 +116,87 @@ class Transformations(Scene):
 
         wxxxx = Text("w = xxxx", font_size = 40, color=Colors.gold_e.value)
         wxxxx.shift(3*DOWN)
-        self.play(FadeIn(wxxxx))
+        wxfull = Text("ww = xxxxxxxx", font_size = 40, color=Colors.gold_e.value)
+        wxfull.shift(3.4*DOWN)
+        self.play(FadeIn(wxxxx, wxfull))
         self.wait(4)
 
         ac1.set_fill(RED, opacity=1.0)
         ac5.set_fill(RED, opacity=1.0)
         wxxxx[2].set_color(WHITE)
+        wxfull[3].set_color(WHITE)
         self.wait(1)
         ac2.set_fill(RED, opacity=1.0)
         ac6.set_fill(RED, opacity=1.0)
         ac1.set_fill(PINK, opacity=0.5)
         ac5.set_fill(PINK, opacity=0.5)
         wxxxx[3].set_color(WHITE)
+        wxfull[4].set_color(WHITE)
         self.wait(1)
         ac3.set_fill(RED, opacity=1.0)
         ac7.set_fill(RED, opacity=1.0)
         ac2.set_fill(PINK, opacity=0.5)
         ac6.set_fill(PINK, opacity=0.5)
         wxxxx[4].set_color(WHITE)
+        wxfull[5].set_color(WHITE)
         self.wait(1)
         ac4.set_fill(RED, opacity=1.0)
         ac8.set_fill(RED, opacity=1.0)
         ac3.set_fill(PINK, opacity=0.5)
         ac7.set_fill(PINK, opacity=0.5)
         wxxxx[5].set_color(WHITE)
-        self.wait(9.5)
+        wxfull[6].set_color(WHITE)
+        self.wait(29.5)
 
-        self.play(FadeOut(start, ac1, ac2, ac3, ac4, ac5, ac6,  ac7, ac8, border, wxxxx, strat, arbarrows))
-        
+        ac4.set_fill(PINK, opacity=0.5)
+        ac8.set_fill(PINK, opacity=0.5)
+        wxxxx.set_color(Colors.gold_e.value)
+        wxfull.set_color(Colors.gold_e.value)
+
+        arbnfa = Group(start, ac1, ac2, ac3, ac4, ac5, ac6, ac7, ac8, border)
+        arb0 = Group(arbnfa, arbarrows)
+
+        start_d, ac1_d, ac2_d, ac3_d, ac4_d, ac5_d, ac6_d, ac7_d, ac8_d = self.CircleGroup()
+        border_d = Circle(radius=0.6)
+        border_d.shift(5.0*RIGHT + 0.7*DOWN)
+        arbarrows_d = self.ArbArrows()
+
+        arbf = Group(start_d, ac1_d, ac2_d, ac3_d, ac4_d, ac5_d, ac6_d, ac7_d, ac8_d, border_d, arbarrows_d)
+
+        self.play(arb0.animate.shift(1.4*UP), FadeIn(arbf), arbf.animate.shift(1.4*DOWN), FadeOut(strat))
+
+        self.wait(4)
+
+        ac1.set_fill(RED, opacity=1.0)
+        ac5_d.set_fill(RED, opacity=1.0)
+        wxxxx[2].set_color(WHITE)
+        wxfull[3].set_color(WHITE)
+        self.wait(1)
+        ac2.set_fill(RED, opacity=1.0)
+        ac6_d.set_fill(RED, opacity=1.0)
+        ac1.set_fill(PINK, opacity=0.5)
+        ac5_d.set_fill(PINK, opacity=0.5)
+        wxxxx[3].set_color(WHITE)
+        wxfull[4].set_color(WHITE)
+        self.wait(1)
+        ac3.set_fill(RED, opacity=1.0)
+        ac7_d.set_fill(RED, opacity=1.0)
+        ac2.set_fill(PINK, opacity=0.5)
+        ac6_d.set_fill(PINK, opacity=0.5)
+        wxxxx[4].set_color(WHITE)
+        wxfull[5].set_color(WHITE)
+        self.wait(1)
+        ac4.set_fill(RED, opacity=1.0)
+        ac8_d.set_fill(RED, opacity=1.0)
+        ac3.set_fill(PINK, opacity=0.5)
+        ac7_d.set_fill(PINK, opacity=0.5)
+        wxxxx[5].set_color(WHITE)
+        wxfull[6].set_color(WHITE)
+        self.wait(11)
+
+        self.play(FadeOut(wxxxx, wxfull, arb0, arbf))
+        arb0.shift(1.4*DOWN)
+        self.wait(2)
     
 
         # Let's write down our strategy so far.
@@ -156,10 +218,11 @@ class Transformations(Scene):
         line5.shift(1.1*DOWN)
 
         self.play(FadeIn(line1, line2, line3))
-        self.wait(1)
+        self.wait(7.5)
         self.play(FadeIn(line4, line5))
-        self.wait(1)
+        self.wait(17)
         self.play(FadeOut(line1, line2, line3, line4, line5))
+        self.wait(4)
 
         # now we need to keep track of three things: the guessed state, the current state of the original NFA simulation,
         # and the current state of the simulation starting from the halfway state.
@@ -174,32 +237,61 @@ class Transformations(Scene):
         self.play(FadeIn(txt1))
         self.wait(0.5)
         self.play(FadeIn(txt2))
-        self.wait(0.5)
+        self.wait(2.5)
         self.play(FadeIn(txt3))
-        self.wait(0.5)
+        self.wait(3)
         self.play(FadeOut(txt1, txt2, txt3))
+        self.wait(1)
 
         # to do this, we can create N copies of the original NFA, N equal to the amount of states in the original NFA.
         # next, we can create epsilon transitions from s' to different states in each copy of the original NFA.
         # we have now guessed every state in the NFA as the midway point. 
 
         #ANIMATION HERE
-        arbnfa = Group(start, ac1, ac2, ac3, ac4, ac5, ac6, ac7, ac8, border)
-        arb0 = Group(arbnfa, arbarrows)
+
+        ac4.set_fill(PINK, opacity=0.5)
+        ac3.set_fill(RED, opacity=1.0)
+        
         arb1 = arb0.copy().shift(0.2*DOWN)
         self.play(FadeIn(arb1))
-        self.wait(1)
         self.play(ScaleInPlace(arb1, 0.2))
-        self.wait(1)
-        arb2 = arb1.copy().shift(2.8*UP)
-        arb3 = arb1.copy().shift(1.4*UP)
-        c1 = Circle(radius=0.05, color=WHITE, fill_opacity=1).shift(1.4*DOWN)
-        c2 = Circle(radius=0.05, color=WHITE, fill_opacity=1).shift(1.7*DOWN)
-        c3 = Circle(radius=0.05, color=WHITE, fill_opacity=1).shift(2.0*DOWN)
+        self.wait(0.7)
+
+        ac3.set_fill(PINK, opacity=0.5)
+        ac1.set_fill(RED, opacity=1.0)
+        arb2 = arb0.copy().shift(2.6*UP).scale(0.2)
+        self.wait(0.1)
+
+        ac1.set_fill(PINK, opacity=0.5)
+        ac2.set_fill(RED, opacity=1.0)
+        arb3 = arb0.copy().shift(1.2*UP).scale(0.2)
+        self.wait(0.1)
+
+        c1 = Circle(radius=0.05, color=WHITE, fill_opacity=1).shift(1.6*DOWN)
+        c2 = Circle(radius=0.05, color=WHITE, fill_opacity=1).shift(1.9*DOWN)
+        c3 = Circle(radius=0.05, color=WHITE, fill_opacity=1).shift(2.2*DOWN)
         arb4 = Group(c1, c2, c3)
-        arb5 = arb1.copy().shift(2.8*DOWN)
+
+        self.wait(0.1)
+        ac2.set_fill(PINK, opacity=0.5)
+        ac8.set_fill(RED, opacity=1.0)
+        arb5 = arb0.copy().shift(3.0*DOWN).scale(0.2)
         self.play(FadeIn(arb2, arb3, arb4, arb5))
+        self.wait(5.5)
+        sprime = Circle(radius=0.5, color=Colors.green_a.value).set_fill(Colors.green_e.value, opacity=0.5).shift(3.0*LEFT+0.2*DOWN)
+        sprime_txt = Text("s\'", font_size = 30, color=WHITE).shift(3.0*LEFT+0.2*DOWN)
+
+        
+        self.play(FadeIn(sprime, sprime_txt))
         self.wait(1)
+
+        mprime_arrow1 = Arrow(start=2.1*LEFT, end=3*UP, color=WHITE, max_stroke_width_to_length_ratio=1.5, max_tip_length_to_length_ratio=0.09).shift(0.6*LEFT+0.1*DOWN)
+        mprime_arrow2 = Arrow(start=1.35*LEFT, end=1.35*RIGHT, color=WHITE, max_stroke_width_to_length_ratio=2, max_tip_length_to_length_ratio=0.1).shift(1.4*LEFT+0.1*DOWN)
+        mprime_arrow3 = Arrow(start=1.2*LEFT, end=1.2*RIGHT+1.2*UP, color=WHITE, max_stroke_width_to_length_ratio=2, max_tip_length_to_length_ratio=0.1).shift(1.55*LEFT+0.1*DOWN)
+        mprime_arrow4 = Arrow(start=3.85*LEFT, end=3.15*DOWN, color=WHITE, max_stroke_width_to_length_ratio=1.5, max_tip_length_to_length_ratio=0.09).shift(1.12*RIGHT+0.1*DOWN)
+        self.play(GrowArrow(mprime_arrow1), GrowArrow(mprime_arrow2), GrowArrow(mprime_arrow3), GrowArrow(mprime_arrow4))
+        self.wait(24)
+        self.play(FadeOut(sprime, sprime_txt, mprime_arrow1, mprime_arrow2, mprime_arrow3, mprime_arrow4))
 
         #then, simultaneously for each guessed state, this NFA will simulate the input string starting from the guessed state.
 
@@ -213,7 +305,7 @@ class Transformations(Scene):
         arbgroup2 = arbgroup1.copy().shift(3.5*RIGHT)
         arbgroup3 = arbgroup1.copy().shift(7*RIGHT)
         self.play(FadeIn(arbgroup2, arbgroup3))
-        self.wait(1)
+        self.wait(26)
         self.play(FadeOut(arbgroup1, arbgroup2, arbgroup3))
 
         #now The NFA will also run the simulation from the original starting state.
@@ -253,11 +345,13 @@ class Transformations(Scene):
         tp4.shift(1.5*DOWN)
 
         self.play(FadeIn(qp))
-        self.wait(1)
+        self.wait(21)
         self.play(FadeIn(ap))
-        self.wait(1)
-        self.play(FadeIn(sp, tp1, tp2, tp3, tp4))
-        self.wait(1)
+        self.wait(17)
+        self.play(FadeIn(sp))
+        self.wait(2.7)
+        self.play(FadeIn(tp1, tp2, tp3, tp4))
+        self.wait(5)
         self.play(FadeOut(qp, ap, sp, tp1, tp2, tp3, tp4))
 
         # here's how this looks with our previous example
@@ -280,7 +374,7 @@ class Transformations(Scene):
         self.play(FadeOut(currStateOld, currStateNew))
         self.play(FadeOut(ex_start, ex_a, ex_aa, ex_aaa, ex_aaaa, ex_ab, ex_aba, ex_abab, ex_abc, reject, arrows, ex_txt))
 
-        self.play(half_l_def.animate.shift(3.6*DOWN).scale(1.667), run_time=1)
+        self.play(half_l_def.animate.shift(3.4*DOWN).scale(1.667), run_time=1)
         self.wait(1)
         
         # hopefully this video has helped you understand transformations.
@@ -368,7 +462,7 @@ class Transformations(Scene):
         return start, ex_a, ex_aa, ex_aaa, ex_aaaa, ex_ab, ex_aba, ex_abab, ex_abc, reject
 
     def ExampleArrows(self):
-        arrow1 = Arrow(start=1*LEFT, end=1*RIGHT, color=WHITE, max_stroke_width_to_length_ratio=3, max_tip_length_to_length_ratio=0.1).shift(2.75*LEFT + 2.0*UP)
+        arrow1 = Arrow(start=1*LEFT+1.5*DOWN, end=1*RIGHT, color=WHITE, max_stroke_width_to_length_ratio=2, max_tip_length_to_length_ratio=0.1).shift(2.75*LEFT + 2.0*UP)
         arrow2 = Arrow(start=0.75*LEFT, end=0.75*RIGHT, color=WHITE, max_stroke_width_to_length_ratio=3, max_tip_length_to_length_ratio=0.18).shift(0.5*LEFT + 2.0*UP)
         arrow3 = Arrow(start=1.1*LEFT, end=1.1*RIGHT, color=WHITE, max_stroke_width_to_length_ratio=3, max_tip_length_to_length_ratio=0.1).shift(1.85*RIGHT + 2.0*UP)
         arrow4 = Arrow(start=0.5*UP, end=0.5*DOWN, color=WHITE, max_stroke_width_to_length_ratio=6, max_tip_length_to_length_ratio=0.25).shift(4.0*LEFT + 1.25*UP)
@@ -382,9 +476,8 @@ class Transformations(Scene):
         border1 = Circle(radius=0.6).shift(3.3*RIGHT + 2.0*UP)
         border2 = Circle(radius=0.6).shift(1.7*LEFT + 0.5*DOWN)
         border3 = Circle(radius=0.6).shift(3.3*RIGHT + 1.6*DOWN)
-        arrows = Group(arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10, arrow11, border1, border2, border3)
 
-        return arrows
+        return arrow1, arrow2, arrow3, arrow4, arrow5, arrow6, arrow7, arrow8, arrow9, arrow10, arrow11, border1, border2, border3
 
     def ExampleText(self):
         txt1 = Text("a", font_size = 25, color=WHITE).shift(4.0*LEFT + 0.5*UP)
@@ -397,9 +490,7 @@ class Transformations(Scene):
         txt8 = Text("abab", font_size = 25, color=WHITE).shift(3.3*RIGHT + 1.6*DOWN)
         txt9 = Text("reject", font_size = 25, color=WHITE).shift(4.0*RIGHT + 0.5*UP)
 
-        txt = Group(txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9)
-
-        return txt
+        return txt1, txt2, txt3, txt4, txt5, txt6, txt7, txt8, txt9
 
     def ArbArrows(self):
         arrow1 = Arrow(start=0.47*LEFT+0.47*DOWN, end=0.47*RIGHT+0.47*UP, color=WHITE, max_stroke_width_to_length_ratio=3, max_tip_length_to_length_ratio=0.18).shift(4.35*LEFT)

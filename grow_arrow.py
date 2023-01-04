@@ -1,0 +1,8 @@
+from manim import *
+
+class GrowArrowExample(Scene):
+    def construct(self):
+        arrows = [Arrow(2 * LEFT, 2 * RIGHT), Arrow(2 * DR, 2 * UL)]
+        VGroup(*arrows).set_x(0).arrange(buff=2)
+        self.play(GrowArrow(arrows[0]))
+        self.play(GrowArrow(arrows[1], point_color=RED))

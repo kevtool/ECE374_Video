@@ -140,7 +140,7 @@ class Dijkstra(Scene):
 ```
 
 Our animation now looks like this:
-![](https://user-images.githubusercontent.com/29498603/233801277-20cf6d9d-07e1-4ab3-a15d-adbba35ed4b8.mp4)
+![](v2.mp4)
 
 
 

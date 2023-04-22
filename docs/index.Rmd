@@ -1,9 +1,26 @@
 ---
-title: "Dijkstra's Algorithm Animation with Manim"
-output: 
-  html_document:
-    toc: FALSE
+title: "My new website"
+name: Mywebsite
+type: inverse
+left:
+- text: About me
+  menu:
+  - text: Learn more about me
+    href: ./aboutme.html
+- text: Project
+  menu:
+  - text: Project part 1
+    href: ./project1.html
+  - text: Project part 2
+    href: ./project2.html
+- text: Contact
+  href: ./contact.html
+right:
+- icon: fa-github fa-lg
+  href: https://github.com/githubusername/mywebsite
 ---
+
+# Dijkstra's Algorithm Animation with Manim
 
 &nbsp;
 
@@ -222,7 +239,7 @@ By calling the show_lines function we defined earlier, in the Dijkstra class:
 graph1.show_lines()
 ```
 
-We can draw the lines like this
+We can draw the lines like this:
 
 (video)
 

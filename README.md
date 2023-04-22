@@ -1,4 +1,6 @@
 # ECE374_Video
 
-Now includes version 1 of the video. <br />
-The script of the video is found at transformations.py.
+Blog: contains the website explaining how I used Manim to draw Dijkstra's algorithm. <br />
+Dijkstra: My attempt at creating a Manim video with a clean python script. <br />
+Reductions: My second Manim video, on reductions. <br />
+Transformations: My first Manim video, on transformations.

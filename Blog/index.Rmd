@@ -222,7 +222,7 @@ By calling the show_lines function we defined earlier, in the Dijkstra class:
 graph1.show_lines()
 ```
 
-We can draw the lines like this:
+We can draw the lines like this
 
 (video)
 

@@ -23,7 +23,7 @@ email: kevinlim9171@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Future site of ECE374 Videos, by Kevin Lim
 baseurl: "/ECE374_Video" # the subpath of your site, e.g. /blog
-url: "https://kevtool.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://kevtool.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 

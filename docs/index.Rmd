@@ -1,0 +1,229 @@
+---
+title: "Dijkstra's Algorithm Animation with Manim"
+output: 
+  html_document:
+    toc: FALSE
+---
+
+&nbsp;
+
+<p>In this article we're going to discuss how to draw an animation of Dijkstra's algorithm in Manim.</p>
+
+We want to draw an undirected, weighted graph that can be used to demonstrate Dijkstra's algorithm.
+
+To start, we would need to draw a few things:
+
+- The vertices
+
+- The edges
+
+- The weights
+
+- The distances from the starting vertex
+
+The graph would look like this:
+
+(picture)
+
+&nbsp;
+
+### Before We Begin
+
+Importing the relevant packages:
+
+```python
+from manim import *
+from manim.utils.color import Colors
+```
+Before we start, let's create the class that will contain our actions. We'll name it class Dijkstra.
+
+```python
+class Dijkstra(Scene):
+    def construct(self):
+        # ...
+```
+
+&nbsp;
+        
+### Vertices
+
+We'll start with the vertices first. We will manually define a few properties for each vertex: its radius, color, opacity, and x-y coordinates. You can add or remove some of these properties if you wish, but I'm sticking to them for now.
+
+Once we decide what properties we want to edit, we can create a 2D list like this:
+
+```python
+# radius, color, opacity, X, Y
+graph1_vlist = [[0.3, WHITE, 1, -3.0, -2.0],
+                [0.3, WHITE, 1, 0.3, -2.8],
+                [0.3, WHITE, 1, 0.0, 0.0],
+                [0.3, WHITE, 1, 4.0, 0.3],
+                [0.3, WHITE, 1, 1.3, 2.5],
+                [0.3, WHITE, 1, -2.5, 1.5]]
+```
+
+And let's create a class to store the graph:
+
+```python
+class Graph:
+    def __init__(self, scene, vertices_list):
+        self.scene = scene
+
+        # set up vertices
+        self.vertices = VGroup()
+        self.add_vertices(vertices_list)
+
+        # Given a list, add vertices accordingly
+        def add_vertices(self, list):
+            for rad, color, opac, x, y in list:
+                v = Circle(radius=rad).set_fill(color, opacity=opac).shift(RIGHT*x + UP*y)
+                self.vertices.add(v)
+```
+
+Note: RIGHT and UP are vectors defined in the manim package.
+
+Here, the graph receives two inputs upon initialization: the scene, which we will use later, and the list of vertices. The list is converted via the function add_vertices to create circles representing the vertices. Now the vertices are stored in the self.vertices group.
+
+Next, we'll need to draw the vertices. We can use the Create function:
+
+(video)
+
+```python
+c1 = Circle(radius=3).set_fill(WHITE, opacity=1)
+Create(self.vertices[i])
+```
+
+To simultaneously create all the vertices in the self.vertices group, we'll need to define a bunch of animations, put them in an array, and play the array.
+
+The graph class now looks like this:
+
+```python
+class Graph:
+    def __init__(self, scene, vertices_list):
+        self.scene = scene
+
+        # set up vertices
+        self.vertices = VGroup()
+        self.add_vertices(vertices_list)
+
+        # Given a list, add vertices accordingly
+        def add_vertices(self, list):
+            for rad, color, opac, x, y in list:
+                v = Circle(radius=rad).set_fill(color, opacity=opac).shift(RIGHT*x + UP*y)
+                self.vertices.add(v)
+
+    # Simultaneously create all vertices
+    def create_vertices(self):
+        animations = []
+        for i in range(len(self.vertices)): 
+            animations.append(Create(self.vertices[i]))
+        self.scene.play(*animations)
+        
+```
+
+Notice that in the function create_vertices we have to use self.scene to refer to the Scene object in the Dijkstra class to play the animations.
+
+Updating our Dijkstra class:
+
+```python
+class Dijkstra(Scene):
+    def construct(self):
+
+        # radius, color, opacity, X, Y
+        graph1_vlist = [[0.3, WHITE, 1, -3.0, -2.0],
+                        [0.3, WHITE, 1, 0.3, -2.8],
+                        [0.3, WHITE, 1, 0.0, 0.0],
+                        [0.3, WHITE, 1, 4.0, 0.3],
+                        [0.3, WHITE, 1, 1.3, 2.5],
+                        [0.3, WHITE, 1, -2.5, 1.5]]
+
+        graph1 = Graph(self, graph1_vlist)
+        graph1.create_vertices()
+```
+
+Our animation now looks like this:
+<video autosize=true controls>
+  <source src="v2.mp4" type="video/mp4">
+</video>
+
+### Edges
+
+Next, we'll draw the edges of the graph. First, make an adjacency list for the graph:
+
+```python
+# adjacency list
+graph1_elist = [[0,1],
+                [0,2],
+                [0,5],
+                [1,2],
+                [1,3],
+                [2,3],
+                [2,5],
+                [3,4],
+                [5,4]]
+```
+
+In the Graph class, we can define a function that will convert the adjacency list to Line objects. Don't forget to add this list to the initialization inputs in the Graph class.
+
+```python
+def add_edges(self, list):
+    for v1, v2 in list:
+        l = Line(self.vertices[v1], self.vertices[v2])
+        self.edges.add(l)
+```
+
+And to draw the lines:
+
+```python
+def show_lines(self):
+    self.scene.play(FadeIn(self.edges))
+```
+
+To recap, our Graph class looks like this now:
+
+```python
+class Graph:
+    def __init__(self, scene, vertices_list, edges_list):
+        self.scene = scene
+
+        # set up vertices
+        self.vertices = VGroup()
+        self.add_vertices(vertices_list) 
+
+        # set up lines
+        self.edges = VGroup()
+        self.add_edges(edges_list)
+
+    # Given a list, add vertices accordingly
+    def add_vertices(self, list):
+        for rad, color, opac, x, y in list:
+            v = Circle(radius=rad).set_fill(color, opacity=opac).shift(RIGHT*x + UP*y)
+            self.vertices.add(v)
+
+    def add_edges(self, list):
+        for v1, v2 in list:
+            l = Line(self.vertices[v1], self.vertices[v2])
+            self.edges.add(l)
+
+    # Simultaneously create all vertices
+    def create_vertices(self):
+        animations = []
+        for i in range(len(self.vertices)): 
+            animations.append(Create(self.vertices[i]))
+        self.scene.play(*animations)
+
+    # Show lines
+    def show_lines(self):
+        self.scene.play(FadeIn(self.lines))
+```
+
+By calling the show_lines function we defined earlier, in the Dijkstra class:
+
+```python
+graph1.show_lines()
+```
+
+We can draw the lines like this
+
+(video)
+
+

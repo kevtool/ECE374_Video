@@ -174,7 +174,7 @@ def add_edges(self, list):
         self.edges.add(l)
 ```
 
-And to draw the lines:
+And to draw the edges:
 
 ```python
 def show_edges(self):
@@ -192,7 +192,7 @@ class Graph:
         self.vertices = VGroup()
         self.add_vertices(vertices_list) 
 
-        # set up lines
+        # set up edges
         self.edges = VGroup()
         self.add_edges(edges_list)
 
@@ -214,18 +214,18 @@ class Graph:
             animations.append(Create(self.vertices[i]))
         self.scene.play(*animations)
 
-    # Show lines
+    # Show edges
     def show_edges(self):
         self.scene.play(FadeIn(self.edges))
 ```
 
-By calling the show_lines function we defined earlier, in the Dijkstra class:
+By calling the show_edges function we defined earlier, in the Dijkstra class:
 
 ```python
 graph1.show_edges()
 ```
 
-We can draw the lines like this:
+We can draw the edges like this:
 <video controls="" muted="" loop="" autoplay="">
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v3.mp4" type="video/mp4">
   Your browser does not support the video tag.

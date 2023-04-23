@@ -22,7 +22,7 @@ To start, we would need to draw a few things:
 
 The graph would look like this:
 
-(picture)
+<img src="https://github.com/kevtool/ECE374_Video/raw/main/docs/img/i1.mp4"></img>
 
 &nbsp;
 
@@ -141,7 +141,7 @@ class Dijkstra(Scene):
 
 Our animation now looks like this:
 <video controls="" muted="" loop="" autoplay="">
-  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/_posts/v2.mp4" type="video/mp4">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

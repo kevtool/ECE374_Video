@@ -88,8 +88,8 @@ Next, we'll need to draw the vertices. We can use the Create function:
   Your browser does not support the video tag.
 </video>
 ```python
-c1 = Circle(radius=3).set_fill(WHITE, opacity=1)
-Create(self.vertices[i])
+c1 = Circle(radius=1).set_fill(WHITE, opacity=1)
+self.play(Create(c1))
 ```
 
 To simultaneously create all the vertices in the self.vertices group, we'll need to define a bunch of animations, put them in an array, and play the array.

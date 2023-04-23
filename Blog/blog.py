@@ -32,8 +32,8 @@ class Graph:
         self.scene.play(*animations)
 
     # Show lines
-    def show_lines(self):
-        self.scene.play(FadeIn(self.lines))
+    def show_edges(self):
+        self.scene.play(FadeIn(self.edges))
 
 class Dijkstra(Scene):
     def construct(self):
@@ -59,4 +59,4 @@ class Dijkstra(Scene):
 
         graph1 = Graph(self, graph1_vlist, graph1_elist)
         graph1.create_vertices()
-        graph1.show_lines()
+        graph1.show_edges()

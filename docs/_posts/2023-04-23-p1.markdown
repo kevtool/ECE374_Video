@@ -215,14 +215,14 @@ class Graph:
         self.scene.play(*animations)
 
     # Show lines
-    def show_lines(self):
-        self.scene.play(FadeIn(self.lines))
+    def show_edges(self):
+        self.scene.play(FadeIn(self.edges))
 ```
 
 By calling the show_lines function we defined earlier, in the Dijkstra class:
 
 ```python
-graph1.show_lines()
+graph1.show_edges()
 ```
 
 We can draw the lines like this:

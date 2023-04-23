@@ -140,7 +140,7 @@ class Dijkstra(Scene):
 ```
 
 Our animation now looks like this:
-<video width="320" height="240" controls>
+<video controls="" width="320" height="240" muted="" loop="" autoplay="">
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/_posts/v2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>

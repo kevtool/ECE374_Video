@@ -268,13 +268,13 @@ Once again we can convert them to objects in Manim, this time Tex objects. (You 
 
 ```python
 def add_weights(self, list):
-    for string, size, col, right, up in list:
-        text = Tex(string, font_size=size, color=col).shift(RIGHT*right + UP*up)
+    for string, size, col, x, y in list:
+        text = Tex(string, font_size=size, color=col).shift(RIGHT*x + UP*y)
         self.weights.add(text)
     
 def add_dists(self, list):
-    for string, size, col, right, up in list:
-        text = Tex(string, font_size=size, color=col).shift(RIGHT*right + UP*up)
+    for string, size, col, x, y in list:
+        text = Tex(string, font_size=size, color=col).shift(RIGHT*x + UP*y)
         self.dists.add(text)
 ```
 

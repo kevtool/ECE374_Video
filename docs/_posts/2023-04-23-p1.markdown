@@ -6,7 +6,7 @@ categories: jekyll update
 ---
 &nbsp;
 
-<p>In this article we're going to discuss how to draw an animation of Dijkstra's algorithm in Manim.</p>
+In this article we're going to discuss how to draw an animation of Dijkstra's algorithm in Manim.
 
 We want to draw an undirected, weighted graph that can be used to demonstrate Dijkstra's algorithm.
 
@@ -146,7 +146,7 @@ Our animation now looks like this:
   Your browser does not support the video tag.
 </video>
 
-
+&nbsp;
 
 ### Edges
 
@@ -230,3 +230,71 @@ We can draw the lines like this:
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v3.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+&nbsp;
+
+### Weights and Distances
+
+Next up are the weights and distances. Again we can make lists for these variables. For the distances we'll initialize them to infinity at the start, except the starting vertex whose distance will be 0.
+
+```python
+graph1_wlist = [
+                        # each entry corresponds to its line in line list
+                        [r"7", 35, WHITE, -1.5, -2.8],
+                        [r"9", 35, WHITE, -3.1, -0.3],
+                        [r"14", 35, WHITE, -1.7, -0.7], 
+                        [r"10", 35, WHITE, -0.1, -1.5],
+                        [r"15", 35, WHITE, 1.7, -1.2],
+                        [r"11", 35, WHITE, 1.9, 0.4],
+                        [r"2", 35, WHITE, -1.0, 0.9],
+                        [r"6", 35, WHITE, 2.7, 1.7],
+                        [r"9", 35, WHITE, -0.7, 2.3],
+
+                        # start and end vertices
+                        [r"a", 35, YELLOW, -3.0, -2.6],
+                        [r"b", 35, YELLOW, 1.8, 2.8]]
+        
+        graph1_dlist = [[r"0", 27, BLUE, -3.5, -1.5],
+                        [r"inf", 27, BLUE, -0.2, -2.3],
+                        [r"inf", 27, BLUE, 0.0, 0.6],
+                        [r"inf", 27, BLUE, 4.0, 0.9],
+                        [r"inf", 27, BLUE, 0.8, 3.0],
+                        [r"inf", 27, BLUE, -3.0, 2.0]]
+```
+
+If you wish, you can also combine the edges list and the weights list, since they will be unchanged throughout the video and the weights correspond to the edges. But I'm going to leave them like this for now.
+
+Once again we can convert them to objects in Manim, this time Tex objects. (You can also use other text objects in Manim.)
+
+```python
+def add_weights(self, list):
+    for string, size, col, right, up in list:
+        text = Tex(string, font_size=size, color=col).shift(RIGHT*right + UP*up)
+        self.weights.add(text)
+    
+def add_dists(self, list):
+    for string, size, col, right, up in list:
+        text = Tex(string, font_size=size, color=col).shift(RIGHT*right + UP*up)
+        self.dists.add(text)
+```
+
+Define some functions in the Graph class so we can show them:
+
+```python
+def ShowWeights(self):
+    self.scene.play(FadeIn(self.weights))
+
+def ShowDists(self):
+    self.scene.play(FadeIn(self.dists))
+```
+
+Now in the Dijkstra class, call the functions:
+
+```python
+graph.ShowWeights()
+graph.ShowDists()
+```
+
+The video now looks like this:
+
+(video)

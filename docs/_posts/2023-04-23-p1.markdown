@@ -300,3 +300,5 @@ The video now looks like this:
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v4.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+We've drawn the graph, but we still have more animation to do. Continue to part 2 here.

@@ -83,9 +83,10 @@ Note: RIGHT and UP are vectors defined in the manim package.
 Here, the graph receives two inputs upon initialization: the scene, which we will use later, and the list of vertices. The list is converted via the function add_vertices to create circles representing the vertices. Now the vertices are stored in the self.vertices group.
 
 Next, we'll need to draw the vertices. We can use the Create function:
-
-(video)
-
+<video controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 ```python
 c1 = Circle(radius=3).set_fill(WHITE, opacity=1)
 Create(self.vertices[i])
@@ -225,6 +226,7 @@ graph1.show_lines()
 ```
 
 We can draw the lines like this:
-
-(video)
-test
+<video controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>

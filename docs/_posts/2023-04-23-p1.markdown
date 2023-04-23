@@ -177,7 +177,7 @@ def add_edges(self, list):
 And to draw the lines:
 
 ```python
-def show_lines(self):
+def show_edges(self):
     self.scene.play(FadeIn(self.edges))
 ```
 

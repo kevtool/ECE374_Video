@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Dijkstra's Algorithm Animation with Manim"
+title:  "Dijkstra's Algorithm Animation with Manim, Part 1"
 date:   2023-04-23 02:05:10 +0800
 categories: jekyll update
 ---

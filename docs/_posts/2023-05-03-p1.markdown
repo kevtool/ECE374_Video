@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Dijkstra's Algorithm Animation with Manim, Part 2"
+date:   2023-04-23 02:05:10 +0800
+categories: jekyll update
+---
+&nbsp;
+
+[Part 1 here][part-1].
+
+Work in Progress.
+
+[part-1]: https://kevtool.github.io/ECE374_Video/jekyll/update/2023/04/22/p1.html

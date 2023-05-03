@@ -13,11 +13,11 @@ class Graph:
         self.edges = VGroup()
         self.add_edges(edges_list)
 
-        # set up lines
+        # set up weights
         self.weights = VGroup()
         self.add_weights(weights_list)
 
-        # set up lines
+        # set up dists
         self.dists = VGroup()
         self.add_dists(dists_list)
 

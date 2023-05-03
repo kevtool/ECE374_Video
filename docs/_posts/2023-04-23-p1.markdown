@@ -301,4 +301,6 @@ The video now looks like this:
   Your browser does not support the video tag.
 </video>
 
-We've drawn the graph, but we still have more animation to do. Continue to part 2 here.
+We've drawn the graph, but we still have more animation to do. Continue to [part 2 here][part-2].
+
+[part-2]: https://kevtool.github.io/ECE374_Video/jekyll/update/2023/05/02/p1.html

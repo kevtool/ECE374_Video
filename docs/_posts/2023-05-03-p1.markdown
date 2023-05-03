@@ -8,6 +8,11 @@ categories: jekyll update
 
 [Part 1 here][part-1].
 
+Now that we have the graph, we can start the animation of Dijkstra's algorithm.
+Most of this will be done through changing properties in objects of the Graph class and showing these changes.
+
+This is our goal:
+
 Work in Progress.
 
 [part-1]: https://kevtool.github.io/ECE374_Video/jekyll/update/2023/04/22/p1.html

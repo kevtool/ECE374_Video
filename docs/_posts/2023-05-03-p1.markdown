@@ -109,7 +109,7 @@ Then, we create an Arrow object corresponding to the current edge, and use the b
 
 ```python
 prevv = -1
-for v1, v2 in graph1_llist:
+for v1, v2 in graph1_elist:
     if prevv != v1:
         if prevv != -1:
             graph1.vertices[prevv].set_fill(RED, opacity=1.0)
@@ -124,7 +124,10 @@ for v1, v2 in graph1_llist:
 
 The video currently looks like this:
 
-(video)
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/tr_arrow.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Updating Distances
 

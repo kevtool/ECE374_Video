@@ -120,10 +120,18 @@ class Dijkstra(Scene):
         graph1.vertices[0].set_fill(YELLOW, opacity=1.0)
         self.wait(0.5)
 
-        v1 = 0
-        v2 = 1
-        arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
-        self.blink(arrow)
+        prevv = -1
+        for v1, v2 in graph1_elist:
+            if prevv != v1:
+                if prevv != -1:
+                    graph1.vertices[prevv].set_fill(RED, opacity=1.0)
+                graph1.vertices[v1].set_fill(YELLOW, opacity=1.0)
+                self.play(Flash(graph1.vertices[v1], flash_radius=graph1_vlist[v1][0]+0.1))
+                self.wait(0.5)
+                prevv = v1
+
+            arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
+            self.blink(arrow)
 
     # given an object, blink it five times.
     def blink(self, obj):

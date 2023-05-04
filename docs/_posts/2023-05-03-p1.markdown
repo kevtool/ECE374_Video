@@ -15,7 +15,7 @@ This is our goal:
 
 (video)
 
-### Updating Vertices and Creating Arrows
+### Updating Vertices
 
 When we visit each vertex, we can highlight that vertex to make it clear which vertex is the current one. 
 We can use the Flash function in Manim:
@@ -47,6 +47,8 @@ The flash animation would look like this in our graph:
   Your browser does not support the video tag.
 </video>
 
+### Arrows
+
 Now we traverse through the current vertex's neighbors.
 Throughout the entire algorithm we will traverse through each edge once. 
 We can reorder the previous graph1_llist to the order of edges the algorithm traverses through:
@@ -69,10 +71,8 @@ For each edge in the list, we want to show an arrow pointing from the first vert
 We can do this by creating an Arrow object:
 
 ```python
-# this piece of code draws an arrow from the first vertex of graph1.vertices to the second vertex.
-v1 = 0
-v2 = 1
-arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
+# v1 and v2 are objects
+arrow = Arrow(v1, v2, color=RED)
 ```
 
 We can define a function that blinks this Arrow object in the Dijkstra class:
@@ -86,6 +86,22 @@ def blink(self, obj):
         self.remove(obj)
         self.wait(0.25)
 ```
+
+Putting these together:
+
+```python
+v1 = 0
+v2 = 1
+arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
+self.blink(arrow)
+```
+
+And here is the result:
+
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/gr_arrow.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 We can now create a loop that traverses through each edge of the graph, in the order we previously defined.
 We first determine if the current vertex has been updated. If it has, we flash the new current vertex.

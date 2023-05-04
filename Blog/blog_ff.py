@@ -117,6 +117,19 @@ class Dijkstra(Scene):
 
         graph1 = Graph(self, graph1_vlist, graph1_elist, graph1_wlist, graph1_dlist)
         graph1.addEverything()
-        self.wait(0.5)
         graph1.vertices[0].set_fill(YELLOW, opacity=1.0)
-        self.play(Flash(graph1.vertices[0], flash_radius=graph1_vlist[0][0]+0.1))
+        self.wait(0.5)
+
+        v1 = 0
+        v2 = 1
+        arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
+        self.blink(arrow)
+
+    # given an object, blink it five times.
+    def blink(self, obj):
+        for i in range(5):
+            self.add(obj)
+            self.wait(0.25)
+            self.remove(obj)
+            self.wait(0.25)
+        

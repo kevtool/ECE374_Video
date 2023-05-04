@@ -19,7 +19,6 @@ This is our goal:
 
 When we visit each vertex, we can highlight that vertex to make it clear which vertex is the current one. 
 We can use the Flash function in Manim:
-
 <video width="720" height="540" controls="" muted="" loop="" autoplay="">
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/ex_flash.mp4" type="video/mp4">
   Your browser does not support the video tag.

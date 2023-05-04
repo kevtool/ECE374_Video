@@ -20,10 +20,15 @@ This is our goal:
 When we visit each vertex, we can highlight that vertex to make it clear which vertex is the current one. 
 We can use the Flash function in Manim:
 
-(video)
+<video controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/ex_flash.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 ```python
-c1 = Circle(radius=1).set_fill(WHITE, opacity=1)
-self.play(Flash(c1), flash_radius=c1+0.5)
+rad = 0.5
+c1 = Circle(rad)
+self.add(c1)
+self.play(Flash(c1, flash_radius=rad))
 ```
 
 The bottom left vertex, labeled a, is our starting vertex. We can flash it first.
@@ -65,7 +70,7 @@ v2 = 1
 arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
 ```
 
-We can define a function that blinks this Arrow object:
+We can define a function that blinks this Arrow object in the Dijkstra class:
 
 ```python
 # given an object, blink it five times.

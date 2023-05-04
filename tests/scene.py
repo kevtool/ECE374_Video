@@ -1,8 +1,8 @@
 from manim import *
 
-
-class CreateCircle(Scene):
+class Test(Scene):
     def construct(self):
-        circle = Circle()  # create a circle
-        circle.set_fill(PINK, opacity=0.5)  # set the color and transparency
-        self.play(Create(circle))  # show the circle on screen
+        rad = 0.5
+        c1 = Circle(rad)
+        self.add(c1)
+        self.play(Flash(c1, flash_radius=rad))

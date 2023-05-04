@@ -142,7 +142,7 @@ v2 = 1
 str1 = "5"
 x = 3.0
 y = 2.0
-texts1.dists[v2] = Tex(str1, font_size=25, color=TEAL_A).shift(RIGHT*x + UP*y)
+graph1.dists[v2] = Tex(str1, font_size=25, color=TEAL_A).shift(RIGHT*x + UP*y)
 ```
 
 Because some of the updated text does not fit into its original location, 
@@ -170,10 +170,32 @@ Now, in our loop, add the updating distances. Each update will occur after the a
 
 ```python
 # This should be inside the for loop we created earlier
-texts1.dists[v2] = Tex(str1, font_size=25, color=TEAL_A).shift(RIGHT*right + UP*up)
+graph1.dists[v2] = Tex(str1, font_size=25, color=TEAL_A).shift(RIGHT*x + UP*y)
 self.wait(1.5)
-texts1.dists[v2] = Tex(str2, font_size=27, color=BLUE).shift(RIGHT*right + UP*up)
+graph1.dists[v2] = Tex(str2, font_size=27, color=BLUE).shift(RIGHT*x + UP*y)
 self.wait(1.5)
+```
+
+The loop looks like this now:
+
+```python
+prevv = -1
+for (v1, v2), (str1, str2, x, y) in zip(graph1_elist, graph1_clist):
+    if prevv != v1:
+        if prevv != -1:
+            graph1.vertices[prevv].set_fill(RED, opacity=1.0)
+        graph1.vertices[v1].set_fill(YELLOW, opacity=1.0)
+        self.play(Flash(graph1.vertices[v1], flash_radius=graph1_vlist[v1][0]+0.1))
+        self.wait(0.5)
+        prevv = v1
+
+    arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
+    self.flash_obj(arrow)
+
+    graph1.dists[v2] = Tex(str1, font_size=25, color=TEAL_A).shift(RIGHT*x + UP*y)
+    self.wait(1.5)
+    graph1.dists[v2] = Tex(str2, font_size=27, color=BLUE).shift(RIGHT*x + UP*y)
+    self.wait(1.5)
 ```
 
 The final product looks like this:

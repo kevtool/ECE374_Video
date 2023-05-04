@@ -1,8 +1,10 @@
 ---
 layout: page
-title: Kevin Lim
+title: About
 permalink: /about/
 ---
+
+# Kevin Lim
 
 Computer & Software Engineer
 

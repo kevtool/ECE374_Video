@@ -13,7 +13,10 @@ Most of this will be done through changing properties in objects of the Graph cl
 
 This is our goal:
 
-(video)
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/goal.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Updating Vertices
 
@@ -199,8 +202,9 @@ for (v1, v2), (str1, str2, x, y) in zip(graph1_elist, graph1_clist):
 ```
 
 The final product looks like this:
-
-(video)
-
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/final_product.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 [part-1]: https://kevtool.github.io/ECE374_Video/jekyll/update/2023/04/22/p1.html

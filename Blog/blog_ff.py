@@ -114,14 +114,22 @@ class Dijkstra(Scene):
                 [r"inf", 27, BLUE, 4.0, 0.9],
                 [r"inf", 27, BLUE, 0.8, 3.0],
                 [r"inf", 27, BLUE, -3.0, 2.0]]
+        
+        graph1_clist = [[r"0 + 7 \textless\ inf", r"7", -0.2, -2.3],
+                [r"0 + 14 \textless\ inf", r"14", 0.3, 0.6],
+                [r"0 + 9 \textless\ inf", r"9", -2.7, 2.0],
+                [r"7 + 10 \textgreater\ 14", r"14", 0.3, 0.6],
+                [r"7 + 15 \textless\ inf", r"22", 4.5, 0.9],
+                [r"14 + 11 \textgreater\ 22", r"22", 4.5, 0.9],
+                [r"14 + 2 \textgreater\ 9", r"9", -2.7, 2.0],
+                [r"22 + 6 \textless\ inf", r"28", 0.8, 3.0],
+                [r"9 + 9 \textless\ 28", r"18", 0.8, 3.0]]
 
         graph1 = Graph(self, graph1_vlist, graph1_elist, graph1_wlist, graph1_dlist)
         graph1.addEverything()
-        graph1.vertices[0].set_fill(YELLOW, opacity=1.0)
-        self.wait(0.5)
 
         prevv = -1
-        for v1, v2 in graph1_elist:
+        for (v1, v2), (str1, str2, x, y) in zip(graph1_elist, graph1_clist):
             if prevv != v1:
                 if prevv != -1:
                     graph1.vertices[prevv].set_fill(RED, opacity=1.0)
@@ -132,6 +140,13 @@ class Dijkstra(Scene):
 
             arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
             self.blink(arrow)
+
+            graph1.dists[v2] = Tex(str1, font_size=25, color=TEAL_A).shift(RIGHT*x + UP*y)
+            self.wait(1.5)
+            graph1.dists[v2] = Tex(str2, font_size=27, color=BLUE).shift(RIGHT*x + UP*y)
+            self.wait(1.5)
+        
+        self.wait(6)
 
     # given an object, blink it five times.
     def blink(self, obj):

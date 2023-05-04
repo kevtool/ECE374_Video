@@ -83,7 +83,7 @@ Note: RIGHT and UP are vectors defined in the manim package.
 Here, the graph receives two inputs upon initialization: the scene, which we will use later, and the list of vertices. The list is converted via the function add_vertices to create circles representing the vertices. Now the vertices are stored in the self.vertices group.
 
 Next, we'll need to draw the vertices. We can use the Create function:
-<video width="720" height="540" controls="" muted="" loop="" autoplay="">
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
@@ -141,7 +141,7 @@ class Dijkstra(Scene):
 ```
 
 Our animation now looks like this:
-<video width="720" height="540" controls="" muted="" loop="" autoplay="">
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
@@ -226,7 +226,7 @@ graph1.show_edges()
 ```
 
 We can draw the edges like this:
-<video width="720" height="540" controls="" muted="" loop="" autoplay="">
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v3.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
@@ -296,7 +296,7 @@ graph1.ShowDists()
 ```
 
 The video now looks like this:
-<video width="720" height="540" controls="" muted="" loop="" autoplay="">
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
   <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/v4.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>

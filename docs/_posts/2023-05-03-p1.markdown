@@ -13,6 +13,117 @@ Most of this will be done through changing properties in objects of the Graph cl
 
 This is our goal:
 
-Work in Progress.
+(video)
+
+### Updating Vertices and Creating Arrows
+
+When we visit each vertex, we can highlight that vertex to make it clear which vertex is the current one. 
+We can use the Flash function in Manim:
+
+(video)
+```python
+c1 = Circle(radius=1).set_fill(WHITE, opacity=1)
+self.play(Flash(c1), flash_radius=c1+0.5)
+```
+
+The bottom left vertex, labeled a, is our starting vertex. We can flash it first.
+In the Graph class, this vertex is stored in the vertices object as the first element. We can call it as graph1.vertices[v1].
+At the same time, turn the vertex yellow to indicate that it is our current vertex.
+
+```python
+graph1.vertices[v1].set_fill(YELLOW, opacity=1.0)
+self.play(Flash(graph1.vertices[v1], flash_radius=graph1_vlist[v1][0]+0.1))
+```
+
+(video)
+
+Now we traverse through the current vertex's neighbors.
+Throughout the entire algorithm we will traverse through each edge once. 
+We can reorder the previous graph1_llist to the order of edges the algorithm traverses through:
+
+```python
+# adjacency list
+graph1_elist = [[0,1],
+                [0,2],
+                [0,5],
+                [1,2],
+                [1,3],
+                [2,3],
+                [2,5],
+                [3,4],
+                [5,4]]
+```
+(My list from part 1 is already ordered properly).
+
+For each edge in the list, we want to show an arrow pointing from the first vertex to the second.
+We can do this by creating an Arrow object:
+
+```python
+# this piece of code draws an arrow from the first vertex of graph1.vertices to the second vertex.
+v1 = 0
+v2 = 1
+arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
+```
+
+We can define a function that blinks this Arrow object:
+
+```python
+# given an object, blink it five times.
+def blink(self, obj):
+    for i in range(5):
+        self.add(obj)
+        self.wait(0.25)
+        self.remove(obj)
+        self.wait(0.25)
+```
+
+We can now create a loop that traverses through each edge of the graph, in the order we previously defined.
+We first determine if the current vertex has been updated. If it has, we flash the new current vertex.
+Then, we create an Arrow object corresponding to the current edge, and use the blink function to show it:
+
+```python
+prevv = -1
+for v1, v2 in graph1_llist:
+    if prevv != v1:
+        if prevv != -1:
+            graph1.vertices[prevv].set_fill(RED, opacity=1.0)
+        graph1.vertices[v1].set_fill(YELLOW, opacity=1.0)
+        self.play(Flash(graph1.vertices[v1], flash_radius=graph1_vlist[v1][0]+0.1))
+        self.wait(0.5)
+        prevv = v1
+
+    arrow = Arrow(graph1.vertices[v1], graph1.vertices[v2], color=RED)
+    self.blink(arrow)
+```
+
+The video currently looks like this:
+
+(video)
+
+### Updating Distances
+
+Next up is updating the distances.
+
+The distances are stored as the dists object in the Graph class. 
+To update a distance, we would need to change its text content and color, and possibly its location.
+To update the first distance, for example, we can do this:
+
+(code)
+
+Because some of the updated text does not fit into its original location, 
+we would need to update the location for some of the distances.
+To organize these locations, we can create a new list to keep track of what needs to be updated.
+You can also append them to existing lists.
+
+(code)
+
+Now, in our loop, add the updating distances. Each update will occur after the arrow has been shown.
+
+(code)
+
+The final product looks like this:
+
+(video)
+
 
 [part-1]: https://kevtool.github.io/ECE374_Video/jekyll/update/2023/04/22/p1.html

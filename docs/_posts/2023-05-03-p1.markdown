@@ -35,11 +35,17 @@ In the Graph class, this vertex is stored in the vertices object as the first el
 At the same time, turn the vertex yellow to indicate that it is our current vertex.
 
 ```python
+v1 = 0
 graph1.vertices[v1].set_fill(YELLOW, opacity=1.0)
 self.play(Flash(graph1.vertices[v1], flash_radius=graph1_vlist[v1][0]+0.1))
 ```
 
-(video)
+The flash animation would look like this in our graph:
+
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/ex_flash.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 Now we traverse through the current vertex's neighbors.
 Throughout the entire algorithm we will traverse through each edge once. 

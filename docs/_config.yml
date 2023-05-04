@@ -24,8 +24,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   Site of ECE 374 Videos. ECE 374 is a course in UIUC on Algorithms and Models of Computations. By Kevin Lim.
 baseurl: "/ECE374_Video" # the subpath of your site, e.g. /blog
 url: "https://kevtool.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: ""
 github_username:  kevtool
+linkedin_username: kevin-lim-b01021203
 
 # Build settings
 theme: minima

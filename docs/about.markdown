@@ -5,8 +5,17 @@ header: Kevin Lim
 permalink: /about/
 ---
 
-<img src="https://github.com/kevtool/ECE374_Video/raw/main/docs/img/face.png">
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
 
-Computer & Software Engineer
+<img class="center" src="https://github.com/kevtool/ECE374_Video/raw/main/docs/img/face.png">
 
-Bachelor of Science in Computer Engineering, University of Illinois-Urbana Champaign
+<p align="center">Computer & Software Engineer</p>
+
+<p align="center">Bachelor of Science in Computer Engineering, University of Illinois-Urbana Champaign</p>

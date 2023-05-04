@@ -56,9 +56,12 @@ Most of this will be done through changing properties in objects of the Graph cl
 
 <p>This is our goal:</p>
 
-<p>(video)</p>
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/goal.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
-<h3 id="updating-vertices-and-creating-arrows">Updating Vertices and Creating Arrows</h3>
+<h3 id="updating-vertices">Updating Vertices</h3>
 
 <p>When we visit each vertex, we can highlight that vertex to make it clear which vertex is the current one. 
 We can use the Flash function in Manim:</p>
@@ -76,11 +79,19 @@ We can use the Flash function in Manim:</p>
 In the Graph class, this vertex is stored in the vertices object as the first element. We can call it as graph1.vertices[v1].
 At the same time, turn the vertex yellow to indicate that it is our current vertex.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">].</span><span class="n">set_fill</span><span class="p">(</span><span class="n">YELLOW</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">].</span><span class="n">set_fill</span><span class="p">(</span><span class="n">YELLOW</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="bp">self</span><span class="p">.</span><span class="n">play</span><span class="p">(</span><span class="n">Flash</span><span class="p">(</span><span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">],</span> <span class="n">flash_radius</span><span class="o">=</span><span class="n">graph1_vlist</span><span class="p">[</span><span class="n">v1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.1</span><span class="p">))</span>
 </code></pre></div></div>
 
-<p>(video)</p>
+<p>The flash animation would look like this in our graph:</p>
+
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/gr_flash.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+<h3 id="arrows">Arrows</h3>
 
 <p>Now we traverse through the current vertex’s neighbors.
 Throughout the entire algorithm we will traverse through each edge once. 
@@ -102,10 +113,8 @@ We can reorder the previous graph1_llist to the order of edges the algorithm tra
 <p>For each edge in the list, we want to show an arrow pointing from the first vertex to the second.
 We can do this by creating an Arrow object:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># this piece of code draws an arrow from the first vertex of graph1.vertices to the second vertex.
-</span><span class="n">v1</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">v2</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">arrow</span> <span class="o">=</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">],</span> <span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">RED</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># v1 and v2 are objects
+</span><span class="n">arrow</span> <span class="o">=</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">RED</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>We can define a function that blinks this Arrow object in the Dijkstra class:</p>
@@ -119,12 +128,27 @@ We can do this by creating an Arrow object:</p>
         <span class="bp">self</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
 </code></pre></div></div>
 
+<p>Putting these together:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">arrow</span> <span class="o">=</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">],</span> <span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">RED</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">blink</span><span class="p">(</span><span class="n">arrow</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And here is the result:</p>
+
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/gr_arrow.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 <p>We can now create a loop that traverses through each edge of the graph, in the order we previously defined.
 We first determine if the current vertex has been updated. If it has, we flash the new current vertex.
 Then, we create an Arrow object corresponding to the current edge, and use the blink function to show it:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prevv</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-<span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">graph1_llist</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">graph1_elist</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">prevv</span> <span class="o">!=</span> <span class="n">v1</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">prevv</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">prevv</span><span class="p">].</span><span class="n">set_fill</span><span class="p">(</span><span class="n">RED</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
@@ -139,7 +163,10 @@ Then, we create an Arrow object corresponding to the current edge, and use the b
 
 <p>The video currently looks like this:</p>
 
-<p>(video)</p>
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/tr_arrow.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
 <h3 id="updating-distances">Updating Distances</h3>
 
@@ -149,22 +176,68 @@ Then, we create an Arrow object corresponding to the current edge, and use the b
 To update a distance, we would need to change its text content and color, and possibly its location.
 To update the first distance, for example, we can do this:</p>
 
-<p>(code)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">str1</span> <span class="o">=</span> <span class="s">"5"</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">graph1</span><span class="p">.</span><span class="n">dists</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEAL_A</span><span class="p">).</span><span class="n">shift</span><span class="p">(</span><span class="n">RIGHT</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">UP</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>Because some of the updated text does not fit into its original location, 
 we would need to update the location for some of the distances.
 To organize these locations, we can create a new list to keep track of what needs to be updated.
 You can also append them to existing lists.</p>
 
-<p>(code)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># each entry corresponds to its edge in graph1_elist.
+# each time we replace the text twice.
+# format of the entries:
+# text to replace 1st time, text to replace 2nd time, x, y.
+</span><span class="n">graph1_clist</span> <span class="o">=</span> <span class="p">[[</span><span class="sa">r</span><span class="s">"0 + 7 \textless\ inf"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"7"</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.3</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"0 + 14 \textless\ inf"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"14"</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"0 + 9 \textless\ inf"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"9"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.7</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"7 + 10 \textgreater\ 14"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"14"</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"7 + 15 \textless\ inf"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"22"</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"14 + 11 \textgreater\ 22"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"22"</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"14 + 2 \textgreater\ 9"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"9"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.7</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"22 + 6 \textless\ inf"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"28"</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>
+                <span class="p">[</span><span class="sa">r</span><span class="s">"9 + 9 \textless\ 28"</span><span class="p">,</span> <span class="sa">r</span><span class="s">"18"</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]]</span>
+</code></pre></div></div>
 
 <p>Now, in our loop, add the updating distances. Each update will occur after the arrow has been shown.</p>
 
-<p>(code)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This should be inside the for loop we created earlier
+</span><span class="n">graph1</span><span class="p">.</span><span class="n">dists</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEAL_A</span><span class="p">).</span><span class="n">shift</span><span class="p">(</span><span class="n">RIGHT</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">UP</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">graph1</span><span class="p">.</span><span class="n">dists</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">BLUE</span><span class="p">).</span><span class="n">shift</span><span class="p">(</span><span class="n">RIGHT</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">UP</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+<span class="bp">self</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The loop looks like this now:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prevv</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">),</span> <span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">graph1_elist</span><span class="p">,</span> <span class="n">graph1_clist</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">prevv</span> <span class="o">!=</span> <span class="n">v1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">prevv</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">prevv</span><span class="p">].</span><span class="n">set_fill</span><span class="p">(</span><span class="n">RED</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">].</span><span class="n">set_fill</span><span class="p">(</span><span class="n">YELLOW</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">play</span><span class="p">(</span><span class="n">Flash</span><span class="p">(</span><span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">],</span> <span class="n">flash_radius</span><span class="o">=</span><span class="n">graph1_vlist</span><span class="p">[</span><span class="n">v1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">prevv</span> <span class="o">=</span> <span class="n">v1</span>
+
+    <span class="n">arrow</span> <span class="o">=</span> <span class="n">Arrow</span><span class="p">(</span><span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v1</span><span class="p">],</span> <span class="n">graph1</span><span class="p">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">RED</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">flash_obj</span><span class="p">(</span><span class="n">arrow</span><span class="p">)</span>
+
+    <span class="n">graph1</span><span class="p">.</span><span class="n">dists</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TEAL_A</span><span class="p">).</span><span class="n">shift</span><span class="p">(</span><span class="n">RIGHT</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">UP</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+    <span class="n">graph1</span><span class="p">.</span><span class="n">dists</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">BLUE</span><span class="p">).</span><span class="n">shift</span><span class="p">(</span><span class="n">RIGHT</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">UP</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>The final product looks like this:</p>
-
-<p>(video)</p>
+<video width="740" height="417" controls="" muted="" loop="" autoplay="">
+  <source src="https://github.com/kevtool/ECE374_Video/raw/main/docs/vid/final_product.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
 
   </div><a class="u-url" href="/ECE374_Video/jekyll/update/2023/05/03/p1.html" hidden></a>
@@ -184,7 +257,7 @@ You can also append them to existing lists.</p>
           <li class="p-name">ECE 374 Videos</li><li><a class="u-email" href="mailto:kevinlim9171@gmail.com">kevinlim9171@gmail.com</a></li></ul>
       </div>
 
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/kevtool"><svg class="svg-icon"><use xlink:href="/ECE374_Video/assets/minima-social-icons.svg#github"></use></svg> <span class="username">kevtool</span></a></li><li><a href="https://www.twitter.com/"><svg class="svg-icon"><use xlink:href="/ECE374_Video/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username"></span></a></li></ul>
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/kevtool"><svg class="svg-icon"><use xlink:href="/ECE374_Video/assets/minima-social-icons.svg#github"></use></svg> <span class="username">kevtool</span></a></li><li><a href="https://www.linkedin.com/in/kevin-lim-b01021203"><svg class="svg-icon"><use xlink:href="/ECE374_Video/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">kevin-lim-b01021203</span></a></li></ul>
 </div>
 
       <div class="footer-col footer-col-3">
